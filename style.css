@@ -23,12 +23,8 @@
   }
 
   #getReady{
-      font-size: 60px;
+      font-size: 50px;
   }
-
-  /* #countDown{
-    font-size: 60px;
-} */
 
 #countDown {
   font-size: 50px;
@@ -63,6 +59,13 @@
     border-radius: 50%;
     transition: transform 0.2s linear;
   }
+
+  #toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 40px;
+  }
   
   /*  target the elemenent after the label*/
   .checkbox:checked + .label .ball{
@@ -76,9 +79,13 @@
   .fa-sun {
     color: yellow;
   }
-    footer {
-        margin: 20px;
-        margin-right: 40px;
+
+  footer {
+    border-top: 1px solid gray;
+  }
+
+     .label {
+        margin: 20px
     }
  .questions {
    margin: 0px 50px 0px 50px;
@@ -90,14 +97,31 @@
    padding-top: 50px;
  }
 
- .btn3d {
-  position:relative;
-  margin-right:10px;
-  margin-top: 20px;
-  margin: top 20px;
-  padding: 20px;
-  font-size: 40px;
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #04AA6D;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
 }
-.btn3d:active {
-  top:9px;
+
+/* .button:hover {background-color: #3e8e41} */
+
+.button:active {
+  /* background-color: #3e8e41; */
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.yesButton {
+  background-color: rgb(36, 124, 28);
+}
+.noButton {
+  margin-top: 30px;
+  background-color: rgb(182, 64, 64);
 }
