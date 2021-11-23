@@ -1,27 +1,57 @@
+// let questions = [
+//   {
+//     question: "Australia is wider than the moon.",
+//     answers: [true]
+//     correctAnswer: 1
+//   },
+//   {
+//     question: "Holland is wider than the moon.",
+//     answers: [false]
+//     correctAnswer: 1
+//   },
+//   {
+//     question: "Sweden has a cross in its flag.",
+//     answers: [true]
+//     correctAnswer: 1
+//   },
+
+// ]
+
+let header = document.querySelector('header');
 let main = document.querySelector('main');
 let div = document.querySelector('div');
 let h1 = document.createElement('h1');
 let countdown = document.createElement('div');
-let h2 = document.createElement('h2');
+let question = document.createElement('h2');
+let buttonContainer = document.createElement('div');
+let yesButton = document.createElement('button')
+let noButton = document.createElement('button')
 h1.setAttribute('id','getReady');
 countdown.setAttribute('id','countDown');
-h2.setAttribute('class','questions');
-h1.textContent="Get Ready!";
+question.setAttribute('class','questions');
+buttonContainer.setAttribute('id','buttonContainer');
+yesButton.setAttribute('class', 'btn btn-success btn3d');
+yesButton.setAttribute('type', 'submit');
+noButton.setAttribute('class', 'btn btn-danger btn3d');
+noButton.setAttribute('type', 'submit');
+h1.textContent="Gör dig redo!";
 countdown.textContent="3";
-h2.textContent="Australia is wider than the moon";
+question.textContent="Australia is wider than the moon";
+yesButton.textContent="Sant";
+noButton.textContent="Falsk";
 
 div.append(h1,countdown);
 
 // 
 
 var timeleft = 2;
-var downloadTimer = setInterval(function(){
+var Timer = setInterval(function(){
   if(timeleft <= 0){
-    clearInterval(downloadTimer);
-    // document.querySelector("#countDown").innerHTML = "Finished";
-    // setTimeout(() => {div.style.opacity = '0'},750);
+    clearInterval(Timer);
     setTimeout(() => {div.remove()});
-    main.append(h2);        
+    main.append(question);
+    question.appendChild(buttonContainer); 
+    buttonContainer.append(yesButton,noButton); 
   } else {
     document.querySelector("#countDown").innerHTML = timeleft;
     
@@ -29,18 +59,12 @@ var downloadTimer = setInterval(function(){
   timeleft -= 1;
 }, 1500);
 
-
-// 
-
-//StartButton
-// let startButton = document.querySelector('#startButton');
-// startButton.addEventListener('click', () => {
-//   setTimeout(() => {startButton.style.opacity = '0'},750);
-// });
-
 // Toggle
 const checkbox = document.querySelector('#checkbox');
 
 checkbox.addEventListener('change', ()=>{
-  document.body.classList.toggle('dark');
+  document.body.classList.toggle('dark')
+  header.classList.toggle('darkText')
+  h1.classList.toggle('darkText')
+  question.classList.toggle('darkText')
 })
