@@ -95,6 +95,7 @@
  #buttonContainer {
    display:grid;
    padding-top: 50px;
+   justify-content: center;
  }
 
 .button {
@@ -108,6 +109,7 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
+  width: 500px;
 }
 
 /* .button:hover {background-color: #3e8e41} */
