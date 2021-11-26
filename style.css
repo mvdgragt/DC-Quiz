@@ -125,5 +125,20 @@
 }
 .noButton {
   margin-top: 30px;
-  background-color: rgb(182, 64, 64);
+  background-color: rgb(36, 124, 28);
+
+}
+
+.button1 {
+  background-color: coral;
+}
+
+.button2 {
+  margin-top: 30px;
+  background-color: coral;
+}
+
+.button3 {
+  margin-top: 30px;
+  background-color: coral;
 }
