@@ -1,96 +1,60 @@
-// Quiz Questions
 let questions = [
   {
     question: "Australia is wider than the moon",
-    answers: true,
-    correctAnswer: 1,
+    answers: ["true", "false"],
+    correctAnswer: 0,
     category: "trueOrFalse",
   },
   {
     question: "Coffee is made from berries",
-    answers: true,
-    correctAnswer: 1,
+    answers: ["true", "false"],
+    correctAnswer: 0,
     category: "trueOrFalse",
   },
   {
     question: "Walt Disney holds the record for the most Oscars",
-    answers: true,
-    correctAnswer: 1,
+    answers: ["true", "false"],
+    correctAnswer: 0,
     category: "trueOrFalse",
   },
   {
     question: "How many sides does a square have?",
-    answers: [3, 4, 5],
-    correctAnswer: 2,
-    category: "chooseBetweenThreeAnswers",
-  },
-  {
-    question: "How many sides does a pentagon have?",
-    answers: [5, 6, 7],
+    answers: ["3", "4", "5"],
     correctAnswer: 1,
     category: "chooseBetweenThreeAnswers",
   },
   {
+    question: "How many sides does a pentagon have?",
+    answers: ["5", "6", "7"],
+    correctAnswer: 0,
+    category: "chooseBetweenThreeAnswers",
+  },
+  {
     question: "How many sides does a hexagon have?",
-    answers: [5, 6, 7],
-    correctAnswer: 2,
+    answers: ["5", "6", "7"],
+    correctAnswer: 1,
     category: "chooseBetweenThreeAnswers",
   },
   {
     question: "Which countries border The Netherlands?",
     answers: ["Belgium", "Germany", "France", "Denmark"],
-    correctAnswer: [1, 2, 3],
+    correctAnswer: ["Belgium", "Germany", "France"],
     category: "checkboxes",
   },
 ];
 
-// Connecting HTML Elements
-let header = document.querySelector("header");
-let main = document.querySelector("main");
-let score = document.querySelector("#score");
-let div = document.querySelector("div");
-const checkbox = document.querySelector("#checkbox");
-
-// creating HTML Elements
-let h1 = document.createElement("h1");
-let countdown = document.createElement("div");
-let question = document.createElement("h2");
-let buttonContainer = document.createElement("div");
-let yesButton = document.createElement("button");
-let noButton = document.createElement("button");
-let button1 = document.createElement("button");
-let button2 = document.createElement("button");
-let button3 = document.createElement("button");
-let amountQuestionsAnswered = document.createElement("h2");
-let i = 0;
-let points = 0;
-
-// Setting HTML Attributes
-h1.setAttribute("id", "getReady");
-countdown.setAttribute("id", "countDown");
-question.setAttribute("class", "questions");
-buttonContainer.setAttribute("id", "buttonContainer");
-yesButton.setAttribute("class", "button yesButton");
-yesButton.setAttribute("value", [true]);
-noButton.setAttribute("class", "button noButton");
-noButton.setAttribute("value", false);
-button1.setAttribute("class", "button button1");
-button2.setAttribute("class", "button button2");
-button3.setAttribute("class", "button button3");
-
-
 // Adding HTML text content
+let h1 = document.createElement("h1");
+h1.setAttribute("id", "getReady");
+let countdown = document.createElement("div");
+countdown.setAttribute("id", "countDown");
 h1.textContent = "Gör dig redo!";
 countdown.textContent = "3";
-yesButton.textContent = "Sant";
-noButton.textContent = "Falsk";
-button1.textContent = questions[i];
-console.log(questions[i].answers[i]);
-// button2.textContent = questions[i].answer[1];
-// button3.textContent = questions[i].answer[2];
+let div = document.querySelector("#main");
 
 // Placing HTML Elements
 div.append(h1, countdown);
+quiz.style.display="none";
 
 // Counting down before Start
 let timeleft = 2;
@@ -99,129 +63,198 @@ let Timer = setInterval(function () {
     clearInterval(Timer);
     setTimeout(() => {
       div.remove();
+      quiz.style.display="block";
     });
-
-    // printing first Question below
-    question.textContent = questions[i].question;
-    amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
-    console.log(questions.indexOf('answers')+2);
-    main.append(question, buttonContainer);
-    score.append(amountQuestionsAnswered);
-    // question.appendChild(buttonContainer);
-    buttonContainer.append(yesButton, noButton);
   } else {
     document.querySelector("#countDown").innerHTML = timeleft;
   }
   timeleft -= 1;
 }, 1500);
-
 // Toggle Darkmode
 
 checkbox.addEventListener("change", () => {
   document.body.classList.toggle("dark");
   header.classList.toggle("darkText");
-  h1.classList.toggle("darkText");
-  question.classList.toggle("darkText");
+  main.classList.toggle("darkText");
 });
 
-// True Button
-yesButton.addEventListener("click", () => {
-  if (i < 2) {
-    i++;
-    amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
-    question.textContent = questions[i].question;
-    question.appendChild(buttonContainer);
-    buttonContainer.append(yesButton, noButton);
-    if (yesButton.value && questions[i - 1].answers === true) {
-      points++;
-      console.log("amount of correct answers: " + points);
-      console.log("i: " + i);
-    }
-  } else if ((i >= 2, i < 4)) {
-    yesButton.remove();
-    noButton.remove();
-    i++;
-    amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
-    question.textContent = questions[i].question;
-    question.appendChild(buttonContainer);
-    buttonContainer.append(button1,button2,button3);
-    button1.textContent = questions[i].answers[0];
-    button2.textContent = questions[i].answers[1];
-    button3.textContent = questions[i].answers[2];
-    points++;
-    console.log("amount of correct answers: " + points);
-    console.log("i: " + i);
-    //  amountQuestionsAnswered.textContent = `Question 7 / 7 `;
-  }
-});
 
-// False Button
-noButton.addEventListener("click", () => {
-  if (i < 2) {
-    i++;
-    amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
-    question.textContent = questions[i].question;
-    question.appendChild(buttonContainer);
-    buttonContainer.append(yesButton, noButton);
-    if (noButton.value && questions[i - 1].answers === !true) {
-      points++;
-      console.log("amount of correct answers: " + points);
-      console.log("i: " + i);
-    }
-  } else if ((i >= 2, i < 4)) {
-    yesButton.remove();
-    noButton.remove();
-    i++;
-    amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
-    question.textContent = questions[i].question;
-    question.appendChild(buttonContainer);
-    buttonContainer.append(button1,button2,button3);
-    button1.textContent = questions[i].answers[0];
-    button2.textContent = questions[i].answers[1];
-    button3.textContent = questions[i].answers[2];
-    points++;
-    console.log("amount of correct answers: " + points);
-    console.log("i: " + i);
-    //  amountQuestionsAnswered.textContent = `Question 7 / 7 `;
-    //  amountQuestionsAnswered.textContent = `Question 7 / 7 `;
-  }
-});
+// console.log(questions[1].question);
+let i = 0;
+let points = 0;
+let QuizQuestion = document.createElement("h1");
+let header = document.querySelector("header");
+let buttonContainer = document.createElement("div");
+buttonContainer.setAttribute("id", "buttonContainer");
+let main = document.querySelector("#quiz");
+main.append(QuizQuestion, buttonContainer);
 
-//If One Answer is correct
+QuizQuestion.textContent = questions[i].question;
 
+let button1 = document.createElement("button");
+button1.textContent = questions[i].answers[0];
+button1.setAttribute("class", "button");
+
+let buttonms1 = document.createElement("button");
+buttonms1.textContent = questions[i + 6].answers[0];
+buttonms1.setAttribute("class", "button");
+
+let button2 = document.createElement("button");
+button2.textContent = questions[i].answers[1];
+button2.setAttribute("class", "button");
+
+let buttonms2 = document.createElement("button");
+buttonms2.textContent = questions[i + 6].answers[1];
+buttonms2.setAttribute("class", "button");
+
+let button3 = document.createElement("button");
+button3.textContent = questions[i].answers[2];
+button3.setAttribute("class", "button");
+
+let buttonms3 = document.createElement("button");
+buttonms3.textContent = questions[i + 6].answers[2];
+buttonms3.setAttribute("class", "button");
+
+let buttonms4 = document.createElement("button");
+buttonms4.textContent = questions[i].answers[3];
+buttonms4.setAttribute("class", "button");
+
+let result = document.querySelector("#result");
+let finished = document.createElement("button");
+finished.setAttribute("class", "buttonFinished");
+finished.textContent = "FINISHED!"
+let countries = [];
+let score = document.querySelector("#score");
+let amountQuestionsAnswered = document.createElement("h2");
+score.append(amountQuestionsAnswered);
+amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
+
+main.append(button1, button2);
+// console.log("i: " + i);
 let checkAnswer = () => {
-  const iterator = this.questions.answers.keys();
-  for (const key of iterator) {
-    if (key === questions.correctAnswer) {
-      console.log(questions.question + ": " + questions.answers[key]);
-    }
-  }
+  i++;
+  points++;
+  QuizQuestion.textContent = questions[i].question;
+  button1.textContent = questions[i].answers[0];
+  button2.textContent = questions[i].answers[1];
+  button3.textContent = questions[i].answers[2];
+  buttonms4.textContent = questions[i].answers[3];
+  amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
 };
 
+let nextQuestion = () => {
+  i++;
+  QuizQuestion.textContent = questions[i].question;
+  button1.textContent = questions[i].answers[0];
+  button2.textContent = questions[i].answers[1];
+  button3.textContent = questions[i].answers[2];
+  buttonms4.textContent = questions[i].answers[3];
+  amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
+};
 
-
-// button1 Button
 button1.addEventListener("click", () => {
-  if ((i >= 2, i < 4)) {
-      if (checkAnswer()) {
-      points++;
-      console.log("amount of correct answers: " + points);
-      console.log("i: " + i);
-    }
-  } else if ((i >= 2, i < 4)) {
-    yesButton.remove();
-    noButton.remove();
-    i++;
-    amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
-    question.textContent = questions[i].question;
-    question.appendChild(buttonContainer);
-    buttonContainer.append(button1,button2,button3);
-    button1.textContent = questions[i].answers[0];
-    button2.textContent = questions[i].answers[1];
-    button3.textContent = questions[i].answers[2];
+  if (
+    questions[i].answers[questions[i].correctAnswer] === button1.textContent &&
+    i < 6
+  ) {
+    checkAnswer();
+    console.log(questions[i].answers[questions[i].correctAnswer]);
+  } else {
+    nextQuestion();
+  }
+  if (i >= 6) {
+    main.append(buttonms1, buttonms2, buttonms3, buttonms4);
+    button1.style.display = "none";
+    button2.style.display = "none";
+    button3.style.display = "none";
+  }
+  if (i >= 3) {
+    main.append(button3);
+  }
+});
+
+button2.addEventListener("click", () => {
+  if (
+    questions[i].answers[questions[i].correctAnswer] === button2.textContent &&
+    i < 6
+  ) {
+    checkAnswer();
+    // console.log(button2.textContent);
+  } else {
+    nextQuestion();
+  }
+  if (i >= 6) {
+    main.append(buttonms1, buttonms2, buttonms3, buttonms4);
+    button1.style.display = "none";
+    button2.style.display = "none";
+    button3.style.display = "none";
+  }
+  if (i >= 3) {
+    main.append(button3);
+  }
+});
+
+button3.addEventListener("click", () => {
+  if (
+    questions[i].answers[questions[i].correctAnswer] === button3.textContent &&
+    i < 6
+  ) {
+    checkAnswer();
+    // console.log(button3.textContent);
+  } else {
+    nextQuestion();
+  }
+  if (i >= 6) {
+    main.append(buttonms1, buttonms2, buttonms3, buttonms4);
+    button1.style.display = "none";
+    button2.style.display = "none";
+    button3.style.display = "none";
+  }
+  if (i >= 3) {
+    main.append(button3);
+  }
+});
+
+buttonms1.addEventListener("click", () => {
+  countries.push(questions[i].answers[0]);
+  buttonms1.style.backgroundColor = "#3f74b1";
+  buttonms1.disabled = true;
+  main.appendChild(result)
+  result.appendChild(finished);
+});
+
+buttonms2.addEventListener("click", () => {
+  countries.push(questions[i].answers[1]);
+  buttonms2.style.backgroundColor = "#3f74b1";
+  buttonms2.disabled = true;
+  main.appendChild(result)
+  result.appendChild(finished);
+});
+
+buttonms3.addEventListener("click", () => {
+  countries.push(questions[i].answers[2]);
+  buttonms3.style.backgroundColor = "#3f74b1";
+  buttonms3.disabled = true;
+  main.appendChild(result)
+  result.appendChild(finished);
+});
+
+buttonms4.addEventListener("click", () => {
+  countries.push(questions[i].answers[3]);
+  buttonms4.style.backgroundColor = "#3f74b1";
+  buttonms4.disabled = true;
+  main.appendChild(result)
+  result.appendChild(finished);
+});
+
+let countriesToString = JSON.stringify(questions[6].correctAnswer);
+
+finished.addEventListener("click", () => {
+  let pushedCountriesToString = JSON.stringify(countries);
+  if (countriesToString == pushedCountriesToString) {
     points++;
-    console.log("amount of correct answers: " + points);
-    console.log("i: " + i);
-    //  amountQuestionsAnswered.textContent = `Question 7 / 7 `;
+    console.log("you have " + points + " points.");
+  } else {
+    console.log("you have " + points + " points.");
   }
 });
