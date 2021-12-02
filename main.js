@@ -75,6 +75,7 @@ let Timer = setInterval(function () {
 checkbox.addEventListener("change", () => {
   document.body.classList.toggle("dark");
   header.classList.toggle("darkText");
+  h1.classList.toggle("darkText");
   main.classList.toggle("darkText");
 });
 
@@ -122,7 +123,7 @@ buttonms4.setAttribute("class", "button");
 let result = document.querySelector("#result");
 let finished = document.createElement("button");
 finished.setAttribute("class", "buttonFinished");
-finished.textContent = "FINISHED!"
+finished.textContent = "Get Results!"
 let countries = [];
 let score = document.querySelector("#score");
 let amountQuestionsAnswered = document.createElement("h2");
@@ -152,13 +153,14 @@ let nextQuestion = () => {
   amountQuestionsAnswered.textContent = `Question ${i + 1} / 7 `;
 };
 
+
+
 button1.addEventListener("click", () => {
   if (
     questions[i].answers[questions[i].correctAnswer] === button1.textContent &&
     i < 6
   ) {
     checkAnswer();
-    console.log(questions[i].answers[questions[i].correctAnswer]);
   } else {
     nextQuestion();
   }
@@ -249,12 +251,36 @@ buttonms4.addEventListener("click", () => {
 
 let countriesToString = JSON.stringify(questions[6].correctAnswer);
 
+let showPoints = () => {
+  QuizQuestion.style.display="none";
+  buttonms1.style.display = "none";
+  buttonms2.style.display = "none";
+  buttonms3.style.display = "none";
+  buttonms4.style.display = "none";
+  finished.style.display = "none";
+  let showPoints = document.createElement("h1");
+  showPoints.textContent="You ended up with " + points + " out of 7 correct answers!";
+  console.log("first: " + points);
+  main.append(showPoints);
+  if (points <4){
+    showPoints.style.color = "red";
+  };
+  if (points <7){
+    showPoints.style.color = "orange";
+  };
+  if (points >6){
+    showPoints.style.color = "green";
+  };
+console.log("second: " + points);
+};
+
 finished.addEventListener("click", () => {
   let pushedCountriesToString = JSON.stringify(countries);
   if (countriesToString == pushedCountriesToString) {
-    points++;
-    console.log("you have " + points + " points.");
+    points++;   
+    showPoints();
+
   } else {
-    console.log("you have " + points + " points.");
+    showPoints();
   }
 });
