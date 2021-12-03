@@ -38,7 +38,7 @@ let questions = [
   {
     question: "Which countries border The Netherlands?",
     answers: ["Belgium", "Germany", "France", "Denmark"],
-    correctAnswer: ["Belgium", "Germany", "France"],
+    correctAnswer: ["Belgium", "Germany"],
     category: "checkboxes",
   },
 ];
@@ -77,6 +77,8 @@ checkbox.addEventListener("change", () => {
   header.classList.toggle("darkText");
   h1.classList.toggle("darkText");
   main.classList.toggle("darkText");
+  amountQuestionsAnswered.classList.toggle("darkText");
+
 });
 
 
@@ -275,12 +277,20 @@ console.log("second: " + points);
 };
 
 finished.addEventListener("click", () => {
-  let pushedCountriesToString = JSON.stringify(countries);
-  if (countriesToString == pushedCountriesToString) {
-    points++;   
+  let isCorrect = true
+  // let pushedCountriesToString = JSON.stringify(countries);
+  if(countries.length !== 2){
+    isCorrect = false;
     showPoints();
+    console.log("första hej!")
 
   } else {
-    showPoints();
-  }
-});
+    countries.forEach(answer => {
+      if(!questions[6].correctAnswer.includes(answer)){
+        isCorrect = false;
+      }
+  })
+  if(isCorrect){points++;}
+  showPoints();
+}
+})
